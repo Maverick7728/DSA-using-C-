@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+
+class TreeNode {
+public:
+    int val;
+    TreeNode *left, *right;
+    TreeNode(int data) {
+        val = data;
+        left = right = nullptr;
+    }
+};  
+
+// To insert a value into a BST
+TreeNode* insertIntoBST(TreeNode* root, int val) {
+    if (root == nullptr) {
+        return new TreeNode(val);
+    }
+    if (val < root->val) {
+        root->left = insertIntoBST(root->left, val);
+    } else {
+        root->right = insertIntoBST(root->right, val);
+    }
+    return root;
+}
+void inOrderTraversal(TreeNode* root) {
+    if (root == nullptr) {
+        return;
+    }
+    inOrderTraversal(root->left);
+    cout << root->val << " " << endl;
+    inOrderTraversal(root->right);
+}
+int main() {
+    TreeNode* root = nullptr; 
+
+//  inserting values inside the BST using insert function
+    root = insertIntoBST(root, 100);
+    root = insertIntoBST(root, 50);
+    root = insertIntoBST(root, 200);
+    root = insertIntoBST(root, 300);
+    root = insertIntoBST(root, 60);
+    root = insertIntoBST(root, 220);
+    root = insertIntoBST(root, 250);
+    root = insertIntoBST(root, 45);
+
+// Perform in-order traversal to display the BST nodes
+    cout << endl << endl << "In-order traversal of the BST: "<<endl;
+    inOrderTraversal(root);
+    cout << endl;
+
+    return 0;
+}
