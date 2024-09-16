@@ -1,0 +1,64 @@
+Write a function to find the longest common prefix string amongst an array of strings.
+If there is no common prefix, return an empty string "".
+
+Example 1:
+
+Input: strs = ["flower","flow","flight"]
+Output: "fl"
+Example 2:
+
+Input: strs = ["dog","racecar","car"]
+Output: ""
+
+Explanation: There is no common prefix among the input strings.
+
+Code:
+#include <vector>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& v) {
+        string ans = "";
+        
+        // Sort the vector of strings
+        sort(v.begin(), v.end());
+        
+        int n = v.size();
+        string first = v[0];   // First string in the sorted vector
+        string last = v[n - 1]; // Last string in the sorted vector
+        
+        // Compare characters of the first and last strings
+        for (int i = 0; i < min(first.size(), last.size()); i++) {
+            // Break if characters do not match
+            if (first[i] != last[i]) {
+                return ans;
+            }
+            // Append matching character to the result
+            ans += first[i];
+        }
+        
+        return ans;
+    }
+};
+
+
+Leetcode soultion:
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& v) {
+        string ans="";
+        sort(v.begin(),v.end());
+        int n=v.size();
+        string first=v[0],last=v[n-1];
+        for(int i=0;i<min(first.size(),last.size());i++){
+            if(first[i]!=last[i]){
+                return ans;
+            }
+            ans+=first[i];
+        }
+        return ans;
+    }
+};
