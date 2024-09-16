@@ -1,0 +1,81 @@
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+An input string is valid if:
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Every close bracket has a corresponding open bracket of the same type.
+
+Example 1:
+Input: s = "()"
+Output: true
+
+Example 2:
+Input: s = "()[]{}"
+Output: true
+
+Example 3:
+Input: s = "(]"
+Output: false
+
+Example 4:
+Input: s = "([])"
+Output: true
+
+Code:
+#include <stack>
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    bool isValid(string str) {
+        stack<char> s;
+        
+        // Traverse the string
+        for (int i = 0; i < str.length(); i++) {
+            char c = str[i];
+            
+            // If it's an opening bracket, push it onto the stack
+            if (c == '(' || c == '{' || c == '[') {
+                s.push(c);
+            } 
+            // If it's a closing bracket, check for corresponding opening bracket
+            else {
+                // If the stack is empty, no opening bracket to match the closing one
+                if (s.empty()) return false;
+                
+                // Check if the top of the stack matches the closing bracket
+                if (c == ')' && s.top() != '(') return false;
+                if (c == '}' && s.top() != '{') return false;
+                if (c == ']' && s.top() != '[') return false;
+                
+                // If matched, pop the opening bracket from the stack
+                s.pop();
+            }
+        }
+        
+        // At the end, stack should be empty if all brackets are balanced
+        return s.empty();
+    }
+};
+
+Leetcode solution:
+
+class Solution{ 
+public:
+    bool isValid(string str){
+    stack<char> s;
+    for(int i=0;i<str.length();i++){
+        char c = str[i];
+        if(c == '(' || c =='{' || c == '['){
+        s.push(c);
+        }else{
+            if(s.empty()) return false;
+            if(c == ')' && s.top() != '(') return false;
+            if(c == '}' && s.top() != '{') return false;
+            if(c == ']' && s.top() != '[') return false;
+            s.pop();
+        }
+    }
+    return s.empty();
+}
+};
